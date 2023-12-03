@@ -16,9 +16,15 @@ export default function Form({events, setEvents}) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log("formData: ", formData)
-        localStorage.setItem("events", JSON.stringify(formData))
+        let existingEvents = localStorage.getItem("events")
+        existingEvents = existingEvents ? JSON.parse(existingEvents) : [];
+        existingEvents.push(formData);
+        localStorage.setItem("events", JSON.stringify(existingEvents))
         setEvents(oldEvents => [...oldEvents, formData])
     };
+    useEffect(() => {
+
+    })
     return (
         <form className="flex flex-col gap-4" id="eventform" onSubmit={handleSubmit}>
             <input name="event" id="event" type="text" placeholder="Event Name" onChange={handleChange} required />
