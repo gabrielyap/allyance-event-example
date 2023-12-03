@@ -9,7 +9,7 @@ export default function EventCard({event, date, index, description}){
             <h2 className = "text-2xl font-semibold">{date}</h2>
             <Link href = {{
                 pathname: '/view',
-                query: {event: event, date: date, description: description}
+                query: {index:index}
             }} >See more</Link>
         </section>
     )
