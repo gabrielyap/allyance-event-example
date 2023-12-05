@@ -1,32 +1,25 @@
 "use client"
-import Image from 'next/image'
-import Link from 'next/link'
+
 import React, { useState, useEffect } from "react"
 import Form from './components/Form'
-import EventCard from './components/EventCard'
+import EventTable from "./components/EventTable"
 
 export default function Home() {
-  const [events, setEvents] = useState([])
+  const [events, setEvents] = useState([]) // Array of all events
 
   useEffect(() => {
+    let existingEvents = localStorage.getItem("events") // existingEvents = events from localStorage
+    setEvents(JSON.parse(existingEvents))
+  }, [])
 
-  })
   return (
-    <main className="flex min-h-screen flex-col items-center p-24">
-      <h1>Event Calendar</h1>
-      <Form events={events} setEvents={setEvents} />
-      <button onClick={() => console.log(events)}>Test events</button>
+    <main className="flex min-h-screen flex-col items-center p-24 gap-8">
+      <h1 className="text-6xl">Event Calendar</h1>
       <div>
-        {
-          events.map((event) => (
-            <div>
-              {
-                <EventCard event = {event.event} date = {event.date}/>
-              }
-            </div>
-          ))
-        }
+        <h2 className="text-xl">New Event</h2>
+        <Form events={events} setEvents={setEvents} />
       </div>
+      <EventTable events={events} />
     </main>
   )
 }
