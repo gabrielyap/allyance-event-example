@@ -3,42 +3,17 @@ import React, { useEffect, useState } from "react"
 import { useSearchParams } from 'next/navigation';
 import Link from "next/link";
 import EditEventForm from "../components/EditEventForm";
-
 export default function Page() {
     const searchParams = useSearchParams()
     const index = searchParams.get('index')
-    const [existingEvents, setExistingEvents] = useState(JSON.parse(localStorage.getItem("events")))
-    const [formData, setFormData] = useState({
-        event: '',
-        date: '',
-        description: '',
-    });
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value,
-        });
-    };
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (existingEvents && existingEvents[index]) {
-            existingEvents[index] = { ...formData };
-            localStorage.setItem('events', JSON.stringify(existingEvents));
-            setExistingEvents(JSON.parse(localStorage.getItem("events"))) // Update state with updated events
-        }
-    };
+    const [existingEvents, setExistingEvents] = useState(JSON.parse(localStorage.getItem("events"))) // existingEvents = events from localStorage
+
     const handleDelete = () => {
         existingEvents.splice(index, 1)
         localStorage.setItem("events", JSON.stringify(existingEvents))
         window.location = "/"
     }
-    useEffect(() => {
-        if (existingEvents && existingEvents[index]) {
-            const { event, date, description } = existingEvents[index];
-            setFormData({ event, date, description });
-        }
-    }, [index]);
+
     return (
         <section className="flex flex-col min-h-screen w-1/2 mx-auto items-center p-12 gap-8 border-2 border-red-600">
             <div className="flex justify-between w-full">
@@ -49,7 +24,6 @@ export default function Page() {
                 </div>
             </div>
 
-
             {index >= existingEvents.length ? (
                 <div>No event with this index!</div>
             ) : (
@@ -57,35 +31,8 @@ export default function Page() {
                     <div className="text-6xl">{existingEvents[index].event}</div>
                     <div className="text-2xl">{existingEvents[index].date}</div>
                     <div className="text-4xl">{existingEvents[index].description}</div>
-                    <form onSubmit={handleSubmit}>
-                        <input
-                            name="event"
-                            type="text"
-                            value={formData.event}
-                            onChange={handleChange}
-                            placeholder="Event Name"
-                            required
-                        />
-                        <input
-                            name="date"
-                            type="text"
-                            value={formData.date}
-                            onChange={handleChange}
-                            placeholder="Date"
-                            required
-                        />
-                        <input
-                            name="description"
-                            type="text"
-                            value={formData.description}
-                            onChange={handleChange}
-                            placeholder="Description"
-                            required
-                        />
-                        <button type="submit">Save Changes</button>
-                    </form>
+                    <EditEventForm existingEvents={existingEvents}  setExistingEvents={setExistingEvents} index={index}/>
                 </div>
-
             )
             }
 

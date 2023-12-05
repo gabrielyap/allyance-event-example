@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from "react"
 
-export default function EditEventForm({ index, existingEvents }) {
+export default function EditEventForm({existingEvents, setExistingEvents, index}) {
     const [formData, setFormData] = useState({
         event: '',
         date: '',
         description: '',
     });
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -14,34 +13,21 @@ export default function EditEventForm({ index, existingEvents }) {
             [name]: value,
         });
     };
-
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        // Get existing events from localStorage
-        let existingEventsArr = JSON.parse(localStorage.getItem('events'));
-
-        // Update the event details at the specified index
-        if (existingEventsArr && existingEventsArr[index]) {
-            existingEventsArr[index] = { ...formData };
-
-            // Set the updated events array back into localStorage
-            localStorage.setItem('events', JSON.stringify(existingEventsArr));
-            // Optionally, perform any other actions after updating
-            // For example, trigger a re-render or update state
-            existingEvents = JSON.parse(localStorage.getItem("events")) // Update state with updated events
+        if (existingEvents && existingEvents[index]) {
+            existingEvents[index] = { ...formData };
+            localStorage.setItem('events', JSON.stringify(existingEvents));
+            setExistingEvents(JSON.parse(localStorage.getItem("events"))) // Update state with updated events
         }
     };
     useEffect(() => {
-        // Retrieve existing events from localStorage
-        const existingEvents = JSON.parse(localStorage.getItem('events'));
-
-        // Populate the form fields with the details of the event at the specified index
         if (existingEvents && existingEvents[index]) {
             const { event, date, description } = existingEvents[index];
             setFormData({ event, date, description });
         }
     }, [index]);
+
     return (
         <form onSubmit={handleSubmit}>
             <input
@@ -70,5 +56,5 @@ export default function EditEventForm({ index, existingEvents }) {
             />
             <button type="submit">Save Changes</button>
         </form>
-    );
-};
+    )
+}
