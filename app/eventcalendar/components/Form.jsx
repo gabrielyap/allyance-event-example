@@ -29,7 +29,7 @@ export default function Form({ setEvents, setOpenModal }) {
     return (
         <form className="flex flex-col gap-4" id="eventform" onSubmit={handleSubmit}>
             <div className="flex justify-between">
-                <h2 className="font-semibold">New Form</h2>
+                <h2 className="font-semibold">New Event</h2>
                 <button className="font-bold text-red-800 ml-auto" onClick={() => setOpenModal(false)}>X</button>
             </div>
 
