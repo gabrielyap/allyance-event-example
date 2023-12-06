@@ -36,7 +36,7 @@ export default function EventTable({ events }) {
                                 </td>
                                 <td className="px-6 py-4">
                                     <Link href={{
-                                        pathname: '/view',
+                                        pathname: '/eventcalendar/view',
                                         query: { index: index }
                                     }} >See more</Link>
                                 </td>
