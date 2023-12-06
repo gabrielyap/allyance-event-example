@@ -24,17 +24,17 @@ export default function EventTable({ events }) {
                 <tbody>
                     {
                         events.map((event, index) => (
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 w-full" key = {index}>
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 w-full" key = {index}>
+                                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {index}
                                 </th>
-                                <td class="px-6 py-4">
+                                <td className="px-6 py-4">
                                     {event.event}
                                 </td>
-                                <td class="px-6 py-4">
+                                <td className="px-6 py-4">
                                     {event.date}
                                 </td>
-                                <td class="px-6 py-4">
+                                <td className="px-6 py-4">
                                     <Link href={{
                                         pathname: '/view',
                                         query: { index: index }
@@ -43,20 +43,6 @@ export default function EventTable({ events }) {
                             </tr>
                         ))
                     }
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Apple MacBook Pro 17"
-                        </th>
-                        <td class="px-6 py-4">
-                            Silver
-                        </td>
-                        <td class="px-6 py-4">
-                            Laptop
-                        </td>
-                        <td class="px-6 py-4">
-                            $2999
-                        </td>
-                    </tr>
                 </tbody>
             </table>
         </div>
