@@ -17,13 +17,10 @@ export default function Home() {
     }, [])
 
     return (
-        <main className="flex min-h-screen flex-col items-center p-24 gap-8 w-1/2 mx-auto">
+        <main className="flex flex-col min-h-screen  items-center p-24 gap-8 lg:w-1/2 mx-auto">
             <h1 className="text-6xl">Event Calendar</h1>
             <EventTable events={events} />
-            <div className="flex w-full justify-between">
-                <Link href = "/" className="flex border-2 mr-auto text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-                    Back
-                </Link>
+            <div className="flex lg:ml-auto ">
                 <button onClick={handleModal} className="flex border-2 ml-auto text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
                     New Event
                 </button>

@@ -18,7 +18,7 @@ export default function Page() {
     }
 
     return (
-        <section className="flex flex-col min-h-screen w-1/2 mx-auto items-center p-12 gap-8 border-0 border-red-600">
+        <section className="flex flex-col min-h-screen lg:w-1/2 mx-auto items-center p-12 gap-8 border-0 border-red-600">
             <div className="flex justify-between w-full">
                 <Link className="flex border-2 text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" href="/eventcalendar">Back</Link>
                 <div className="flex gap-4">
