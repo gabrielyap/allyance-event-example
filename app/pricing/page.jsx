@@ -13,21 +13,37 @@ export default function Home() {
   useEffect(() => {
     async function getPageData() {
       const apiUrlEndpoint = `http://localhost:5000/api/mysql/products`
-      const response = await fetch(apiUrlEndpoint)
-      const res = await response.json()
-      console.log(res)
-      setDataResponse(res.products)
+      try {
+        const response = await fetch(apiUrlEndpoint);
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const res = await response.json();
+        console.log(res);
+        setDataResponse(res.products);
+      } catch (error) {
+        // Handle the error here
+        console.error('Error fetching data:', error);
+
+        // Set dataResponse to some static data or handle the error condition
+        setDataResponse([]); // For example, setting an empty array as static data
+      }
     }
     getPageData()
   }, [])
   return (
     <div className="bg-white py-24 sm:py-32">
-      <h1 className = "flex justify-center mx-auto underline">SQL Database Retrieval</h1>
-      <div className = "flex flex-col mx-auto">{dataResponse.map((product, index) => (
-        <div className ="mx-auto" key = {index}>
-          {product.name} | {product.color}
-        </div>
-      ))}
+      <h1 className="flex justify-center mx-auto underline">SQL Database Retrieval</h1>
+      <div className="flex flex-col mx-auto">
+        {dataResponse ? (dataResponse.map((product, index) => (
+          <div className="mx-auto" key={index}>
+            {product.name} | {product.color}
+          </div>
+        ))) : (
+          null
+        )}
       </div>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl sm:text-center">
