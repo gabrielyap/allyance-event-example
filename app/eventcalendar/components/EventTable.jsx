@@ -22,7 +22,7 @@ export default function EventTable({ events }) {
                     </tr>
                 </thead>
                 <tbody>
-                    {
+                    { events ? (
                         events.map((event, index) => (
                             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 w-full" key = {index}>
                                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -42,6 +42,9 @@ export default function EventTable({ events }) {
                                 </td>
                             </tr>
                         ))
+                    ) : (
+                        <div className = "flex mt-4">No events!</div>
+                    )
                     }
                 </tbody>
             </table>

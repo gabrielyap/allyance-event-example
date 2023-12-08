@@ -20,7 +20,7 @@ export default function Form({ setEvents, setOpenModal }) {
         existingEvents = existingEvents ? JSON.parse(existingEvents) : [];
         existingEvents.push(formData);
         localStorage.setItem("events", JSON.stringify(existingEvents))
-        setEvents(oldEvents => [...oldEvents, formData])
+        setEvents(JSON.parse(localStorage.getItem("events")))
         setOpenModal(false)
     };
     useEffect(() => {
